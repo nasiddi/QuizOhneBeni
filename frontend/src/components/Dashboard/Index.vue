@@ -1,0 +1,115 @@
+<template>
+  <div>
+    <b-row
+      v-if="Object.keys(json).length !== 0"
+      size="lg"
+      class="mt-4">
+      <b-col>
+        <CatCard
+          :cat="json.cat1"
+          :questions="questions.cat1"/>
+      </b-col>
+      <b-col>
+        <CatCard
+          :cat="json.cat2"
+          :questions="questions.cat1"/>
+
+      </b-col>
+      <b-col>
+        <CatCard
+          :cat="json.cat3"
+          :questions="questions.cat1"/>
+      </b-col>
+    </b-row>
+    <b-row
+      v-if="Object.keys(json).length !== 0"
+      size="lg"
+      class="mt-4">
+      <b-col>
+        <CatCard
+          :cat="json.cat4"
+          :questions="questions.cat1"/>
+
+      </b-col>
+      <b-col>
+        <CatCard
+          :cat="json.cat5"
+          :questions="questions.cat1"/>
+
+      </b-col>
+      <b-col>
+        <CatCard
+          :cat="json.cat6"
+          :questions="questions.cat1"/>
+
+
+      </b-col>
+    </b-row>
+  </div>
+</template>
+
+<script>
+import CatCard from './CatCard';
+
+
+export default {
+  components: {
+    CatCard,
+  },
+  data: () => ({
+    json: {},
+    questions: {},
+  }),
+  created() {
+    this.$http.post('jobs/catclicked')
+      .then((res) => {
+        this.json = res.body;
+      });
+    this.$http.post('jobs/questions')
+      .then((res) => {
+        this.questions = res.body;
+      });
+  },
+  methods: {
+    async reload() {
+      let notifLoading = null;
+      this.$http.post('jobs/reload')
+        .then(notifLoading = this.$snotify.info('Reloading', { timeout: 0 }))
+        .then((res) => {
+          this.$snotify.remove(notifLoading.id);
+          if (res.body === 'failed') {
+            this.$snotify.error('Loading failed');
+          } else {
+            this.$snotify.success(res.body);
+          }
+        });
+    },
+    async goToQuestion(cat, num) {
+      this.$router.push({
+        name: 'sync.prep',
+        params: [cat, num],
+      });
+    },
+    async stats() {
+      this.$router.push({
+        name: 'stats',
+      });
+    },
+    async update() {
+      this.$router.push({
+        name: 'update',
+      });
+    },
+    async batch() {
+      this.$router.push({
+        name: 'batch.prep',
+      });
+    },
+    async files() {
+      this.$router.push({
+        name: 'filetree',
+      });
+    },
+  },
+};
+</script>
