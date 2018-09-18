@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col>
-      <p>series manager</p>
+      <p>QuizOhneBeni</p>
     </b-col>
   </b-row>
 </template>

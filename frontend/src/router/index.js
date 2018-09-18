@@ -15,6 +15,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import Question from '@/components/Question';
+import Group from '@/components/Group';
+import Answer from '@/components/Answer';
 
 import Home from '@/components/Home';
 import Sync from '@/components/Sync';
@@ -66,7 +68,6 @@ Vue.use(Meta);
 Vue.use(VueMoment);
 Vue.use(VueCookie);
 
-
 Vue.use(VueLodash, { name: '_' });
 
 Vue.http.options.root = config.rootUrl;
@@ -76,13 +77,11 @@ Vue.http.interceptors.push((request) => {
 
 Vue.use(Auth);
 
-
 Vue.use(Snotify, {
   toast: {
     position: SnotifyPosition.rightTop,
   },
 });
-
 
 export default new Router({
   mode: 'history',
@@ -97,6 +96,16 @@ export default new Router({
       name: 'question',
       component: Question,
       beforeEnter: Vue.prototype.$auth.requireAuth,
+    },
+    {
+      path: '/group',
+      name: 'group',
+      component: Group,
+    },
+    {
+      path: '/answer',
+      name: 'answer',
+      component: Answer,
     },
     {
       path: '/update',

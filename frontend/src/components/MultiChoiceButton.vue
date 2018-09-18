@@ -6,7 +6,7 @@
       size="lg"
       class="mt-2"
       @click="validateAnswer(button[0])"
-    >{{ button[1] }}</b-button>
+    >{{ button [2] + button[1] }}</b-button>
   </div>
 </template>
 

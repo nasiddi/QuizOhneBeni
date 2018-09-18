@@ -1,18 +1,15 @@
 <template>
   <div>
-    <b-card
-      :title="question.q"
-      class="mt-3"
-      border-variant="primary"
-      header-bg-variant="primary"
-      header-text-variant="white"
-      align="center">
-      <MultiChoiceButton
-        v-for="(value, key) in question.a"
-        :key="key"
-        :button="[value[0], key, value[1]]"
-      />
-    </b-card>
+    <b-form-select
+      v-model="group"
+      :options="groups"
+      class="mb-3 mt-3" />
+    <b-button
+      :variant="'primary'"
+      :style="{width: '100%'}"
+      class="mt-2"
+      @click="goToAnswer()"
+    >Continue</b-button>
   </div>
 </template>
 
@@ -27,26 +24,24 @@ export default {
   props: {
   },
   data: () => ({
-    question: {},
+    groups: [{ value: null, text: 'Gruppe wählen' }, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    group: null,
   }),
   computed: {
   },
   watch: {
   },
   created() {
-    this.question = this.$route.params;
+
   },
   mounted() {
   },
   methods: {
-    async goToQuestion(points) {
-      this.cat[points] = false;
-      this.$http.post('jobs/catupdate', this.cat)
-        .then(
-          this.$router.push({
-            name: 'dashboard',
-          }),
-        );
+    async goToAnswer() {
+      this.$router.push({
+        name: 'answer',
+        params: { group: this.group },
+      });
     },
     async validateAnswer(answer) {
       if (this.question.a[answer][0]) {

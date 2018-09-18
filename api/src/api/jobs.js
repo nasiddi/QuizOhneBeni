@@ -39,6 +39,30 @@ routes.post('/questions', async (req, res) => {
   });
 });
 
+routes.post('/saveanswer', async (req, res) => {
+  const outputFile = path.join(config.directories.storage, 'answers.json');
+
+  fs.readJson(outputFile, (err, file) => {
+    if (err) {
+      winston.error(err);
+      res.sendStatus(500).end();
+    }
+    const f = file;
+    f[req.body.group] = req.body.answer;
+    fs.writeJSON(outputFile, f, (err2) => {
+      console.log('req.body');
+      console.log(req.body);
+      console.log('f');
+      console.log(f);
+      if (err2) {
+        winston.error(err2);
+        res.sendStatus(500).end();
+      }
+      res.json(req.body.answer);
+    });
+  });
+});
+
 routes.post('/catupdate', async (req, res) => {
   const outputFile = path.join(config.directories.storage, 'cat_clicked.json');
 
