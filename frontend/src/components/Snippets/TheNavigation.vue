@@ -36,6 +36,13 @@
           <b-dropdown-item :to="{ name: 'settings' }">
             <font-awesome-icon icon="cogs" /> Settings
           </b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'finish' }">
+            Finish
+          </b-dropdown-item>
+          <b-dropdown-item-button @click="resetCat()">Reset</b-dropdown-item-button>
+          <b-dropdown-item :to="{ name: 'info' }">
+            <font-awesome-icon icon="info-circle" /> Info
+          </b-dropdown-item>
           <b-dropdown-divider/>
           <b-dropdown-item @click="logout">
             <font-awesome-icon icon="sign-out-alt" /> Logout
@@ -82,6 +89,14 @@ export default {
   methods: {
     logout() {
       this.$auth.logoutHard();
+    },
+    async resetCat() {
+      this.$http.post('jobs/catreset').then((res) => {
+        this.$router.push({
+          name: 'reroute',
+          params: res.body,
+        });
+      });
     },
     isRoutePrefix(prefix) {
       return this.$router.currentRoute.path.split('/')[1] === prefix;

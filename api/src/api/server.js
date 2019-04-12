@@ -49,6 +49,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', auth.routesPublic);
+app.use('/jobs', jobs.routes);
+
 
 //
 // ABOVE: public API

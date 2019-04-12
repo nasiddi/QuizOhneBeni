@@ -17,6 +17,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Question from '@/components/Question';
 import Group from '@/components/Group';
 import Answer from '@/components/Answer';
+import Info from '@/components/Info';
+import Reroute from '@/components/Snippets/Reroute';
+import Finish from '@/components/Finish';
+
 
 import Home from '@/components/Home';
 import Sync from '@/components/Sync';
@@ -120,6 +124,18 @@ export default new Router({
       path: '/batch/prep',
       name: 'batch.prep',
       component: BatchPrep,
+      beforeEnter: Vue.prototype.$auth.requireAuth,
+    },
+    {
+      path: '/reroute',
+      name: 'reroute',
+      component: Reroute,
+      beforeEnter: Vue.prototype.$auth.requireAuth,
+    },
+    {
+      path: '/finish',
+      name: 'finish',
+      component: Finish,
       beforeEnter: Vue.prototype.$auth.requireAuth,
     },
     {
@@ -255,6 +271,12 @@ export default new Router({
       path: '/settings',
       name: 'settings',
       component: SettingsIndex,
+      beforeEnter: Vue.prototype.$auth.requireAuth,
+    },
+    {
+      path: '/info',
+      name: 'info',
+      component: Info,
       beforeEnter: Vue.prototype.$auth.requireAuth,
     },
   ],

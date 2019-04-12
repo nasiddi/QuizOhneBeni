@@ -18,6 +18,8 @@ module.exports = {
     uploads: path.resolve('./storage/uploads'),
     storage: path.resolve('./storage'),
     backend: path.resolve('../backend'),
+    media: path.resolve('./storage/media'),
+
   },
   logging: {
     http: true,

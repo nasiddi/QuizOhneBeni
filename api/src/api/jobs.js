@@ -39,28 +39,52 @@ routes.post('/questions', async (req, res) => {
   });
 });
 
-routes.post('/saveanswer', async (req, res) => {
+routes.post('/loadanswers', async (req, res) => {
   const outputFile = path.join(config.directories.storage, 'answers.json');
-
   fs.readJson(outputFile, (err, file) => {
     if (err) {
       winston.error(err);
       res.sendStatus(500).end();
     }
-    const f = file;
-    f[req.body.group] = req.body.answer;
-    fs.writeJSON(outputFile, f, (err2) => {
-      console.log('req.body');
-      console.log(req.body);
-      console.log('f');
-      console.log(f);
-      if (err2) {
-        winston.error(err2);
-        res.sendStatus(500).end();
-      }
-      res.json(req.body.answer);
-    });
+    res.json(file);
   });
+});
+
+routes.post('/saveanswer', async (req, res) => {
+  const outputFile = path.join(config.directories.storage, 'answers.json');
+  const lock = path.join(config.directories.storage, 'answers.lock');
+  while (true) {
+    if (!fs.existsSync(lock)) {
+      fs.closeSync(fs.openSync(lock, 'w'));
+      fs.readJson(outputFile, (err, file) => {
+        if (err) {
+          winston.error(err);
+          res.sendStatus(500).end();
+        }
+        const f = file;
+        if (req.body.group in f) {
+          f[req.body.group] = req.body.answer;
+          fs.writeJSON(outputFile, f, (err2) => {
+            console.log('req.body');
+            console.log(req.body);
+            console.log('f');
+            console.log(f);
+            if (err2) {
+              winston.error(err2);
+              res.sendStatus(500).end();
+            }
+            res.json(req.body.answer);
+          });
+        } else {
+          res.send('failed');
+        }
+      });
+      fs.unlink(lock);
+      break;
+    } else {
+      wait(100);
+    }
+  }
 });
 
 routes.post('/catupdate', async (req, res) => {
@@ -90,6 +114,25 @@ routes.post('/catupdate', async (req, res) => {
 routes.post('/catreset', async (req, res) => {
   const outputFile = path.join(config.directories.storage, 'cat_clicked.json');
   const inputFile = path.join(config.directories.storage, 'cat_clicked_reset.json');
+
+  fs.readJson(inputFile, (err, file) => {
+    if (err) {
+      winston.error(err);
+      res.sendStatus(500).end();
+    }
+    fs.writeJSON(outputFile, file, (err2) => {
+      if (err2) {
+        winston.error(err2);
+        res.sendStatus(500).end();
+      }
+      res.json(file);
+    });
+  });
+});
+
+routes.post('/resetanswers', async (req, res) => {
+  const outputFile = path.join(config.directories.storage, 'answers.json');
+  const inputFile = path.join(config.directories.storage, 'answers_reset.json');
 
   fs.readJson(inputFile, (err, file) => {
     if (err) {

@@ -1,54 +1,72 @@
 <template>
   <div>
-    <b-button
-      :variant="color"
-      :style="{width: '100%'}"
-      size="lg"
-      class="mt-2"
-      @click="validateAnswer(button[0])"
-    >{{ button [2] + button[1] }}</b-button>
+    <b-row size="lg">
+      <b-col>
+        <b-button
+          :variant="color"
+          :style="{width: '100%'}"
+          size="lg"
+          class="mt-2"
+          @click="showColor()"
+        >{{ letter + ') ' + button[1] }}</b-button>
+      </b-col>
+      <b-col
+        v-for="sub in subs"
+        :key="sub"
+        class="px-0 mx-0">
+        <b-btn
+          :variant="color"
+          :style="{width: '30px'}"
+          class="mt-2 px-0 mx-0"
+          size="lg"
+        >{{ sub }}</b-btn>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
-
 export default {
-  components: {
-  },
+  components: {},
   props: {
     button: {
       type: Array,
       required: true,
     },
-  },
-  data: () => ({
-    question: {},
-    color: 'primary',
-  }),
-  computed: {
-  },
-  watch: {
-  },
-  created() {
-  },
-  mounted() {
-  },
-  methods: {
-    async goToQuestion(points) {
-      this.cat[points] = false;
-      this.$http.post('jobs/catupdate', this.cat)
-        .then(
-          this.$router.push({
-            name: 'dashboard',
-          }),
-        );
+    subs: {
+      type: Array,
+      required: true,
     },
-    async validateAnswer(answer) {
-      if (answer) {
-        this.color = 'success';
-      } else {
-        this.color = 'danger';
+    letter: {
+      type: String,
+      required: true,
+    },
+    solution: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  data: () => ({}),
+  computed: {
+    color() {
+      if (!this.solution) {
+        return 'primary';
       }
+      return this.validateAnswer(this.button[0]);
+    },
+  },
+  watch: {},
+  created() {},
+  mounted() {},
+  methods: {
+    validateAnswer(answer) {
+      if (answer) {
+        return 'success';
+      }
+      return 'danger';
+    },
+    showColor() {
+      this.solution = true;
     },
   },
 };

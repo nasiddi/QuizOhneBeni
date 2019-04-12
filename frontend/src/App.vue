@@ -11,16 +11,8 @@
       fluid
     >
       <b-row>
-        <b-col :cols="1">
-          <router-view name="sidebarLeft"/>
-        </b-col>
-
-        <b-col :cols="10">
+        <b-col :cols="12">
           <router-view id="routerview-main"/>
-        </b-col>
-
-        <b-col :cols="1">
-          <router-view name="sidebarRight"/>
         </b-col>
       </b-row>
     </b-container>
@@ -45,7 +37,7 @@ export default {
     this.loadSettings();
   },
   metaInfo: {
-    title: 'Series Manager',
+    title: 'Quiz à Litness',
     titleTemplate: (titleChunk) => {
       const suffix = '';
       return titleChunk ? `${titleChunk} ${suffix}` : suffix;

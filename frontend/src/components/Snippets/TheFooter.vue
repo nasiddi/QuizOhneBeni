@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col>
-      <p>QuizOhneBeni</p>
+      <p>Quiz à Litness</p>
     </b-col>
   </b-row>
 </template>
