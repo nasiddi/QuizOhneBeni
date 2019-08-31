@@ -1,4 +1,3 @@
-
 import io_utlis
 import pandas as pd
 
@@ -18,13 +17,12 @@ def generate_question(text='', answer='', f1='', f2='', f3='', f4='', img='', au
     }
 
 
-
-
-
-csv = pd.read_csv('questions.csv', header=0, delimiter=",", quoting=0, quotechar='"',
+csv = pd.read_csv('/Users/nadina/code/QuizOhneBeni/api/storage/questions.csv', header=0, delimiter=",", quoting=0, quotechar='"',
                        encoding='utf-8', dtype='str', keep_default_na=False, error_bad_lines=False)
 j = {'cat1': {}, 'cat2': {}, 'cat3': {}, 'cat4': {}, 'cat5': {}, 'cat6': {}}
 for index, row in csv.iterrows():
+    if not row.text:
+        break
     j[row['cat']][row.points] = generate_question(text=row.text,
                       answer=row.answer,
                       f1=str(row.f1),
@@ -36,7 +34,7 @@ for index, row in csv.iterrows():
 
 pass
 print(j)
-io_utlis.save_json(j, 'C:\\Users\\Nadina\\Documents\\code\\QuizOhneBeni\\api\\storage\\questions.json')
+io_utlis.save_json(j, '/Users/nadina/code/QuizOhneBeni/api/storage/questions.json')
 
 
 

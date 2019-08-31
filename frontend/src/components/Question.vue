@@ -84,7 +84,7 @@
       <b-button
         class="mt-2 mx-2"
         @click="loadSubmissions()"
-      >Save Submissions</b-button>
+      >Load Submissions</b-button>
       <b-button
         class="mt-2 mx-2"
         @click="showSubmissions()"
@@ -191,23 +191,28 @@ export default {
       for (const [key, value] of Object.entries(this.subs)) {
         switch (value) {
         case 'a':
-          this.a.push(key);
+          this.updateChoice(key, this.a);
           break;
         case 'b':
-          this.b.push(key);
+          this.updateChoice(key, this.b);
           break;
         case 'c':
-          this.c.push(key);
+          this.updateChoice(key, this.c);
           break;
         case 'd':
-          this.d.push(key);
+          this.updateChoice(key, this.d);
           break;
         case 'e':
-          this.e.push(key);
+          this.updateChoice(key, this.e);
           break;
         default:
           break;
         }
+      }
+    },
+    updateChoice(key, choice) {
+      if (!choice.includes(key)) {
+        choice.push(key);
       }
     },
     showSolution() {
@@ -226,7 +231,7 @@ export default {
           this.subs = res.body;
           // eslint-disable-next-line no-restricted-syntax
           for (const [key, value] of Object.entries(this.subs)) {
-            if (value !== '') {
+            if (value !== '' && !this.answered.includes(key)) {
               this.answered.push(key);
             }
           }

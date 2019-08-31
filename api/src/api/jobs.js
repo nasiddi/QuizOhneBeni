@@ -12,6 +12,7 @@ const jobModel = require('./../models/job');
 const processModel = require('./../models/process');
 const config = require('../../config');
 const python = require('../python/controller');
+const papa = require('papaparse');
 
 const tvdb = new TVDB('C9BPCUYZ8GFT2BZL');
 
@@ -29,13 +30,38 @@ routes.post('/catclicked', async (req, res) => {
 });
 
 routes.post('/questions', async (req, res) => {
-  const outputFile = path.join(config.directories.storage, 'questions.json');
-  fs.readJson(outputFile, (err, file) => {
-    if (err) {
-      winston.error(err);
-      res.sendStatus(500).end();
-    }
-    res.json(file);
+  const inputFileJson = path.join(config.directories.storage,
+    'questions.json');
+  const inputFile = path.join(config.directories.storage, 'questions.csv');
+  var questions = { 'cat1': {}, 'cat2': {}, 'cat3': {}, 'cat4': {}, 'cat5': {}, 'cat6': {} };
+  var data;
+  var input = fs.readFileSync(inputFile, 'utf8');
+  papa.parse(input, {
+    header: true,
+    delimiter: ",",
+    quoteChar: '"',
+    complete: function (results) {
+      data = results.data;
+      var counter = 0;
+      var d = data[counter];
+      while (d.text != ''){
+        var unordered = { [d.answer]: true, [d.f1]: false, [d.f2]: false, [d.f3]: false, [d.f4]: false };
+        const ordered = {};
+        Object.keys(unordered).sort().forEach(function (key) {
+          ordered[key] = unordered[key];
+        });
+        questions[d['cat']][d.points] = {
+          'a': ordered,
+          'audio': d.audio,
+          'img': d.img,
+          'q': d.text
+        }
+
+        counter += 1;
+        d = data[counter]
+      }
+      res.json(questions);
+    },
   });
 });
 
@@ -65,10 +91,6 @@ routes.post('/saveanswer', async (req, res) => {
         if (req.body.group in f) {
           f[req.body.group] = req.body.answer;
           fs.writeJSON(outputFile, f, (err2) => {
-            console.log('req.body');
-            console.log(req.body);
-            console.log('f');
-            console.log(f);
             if (err2) {
               winston.error(err2);
               res.sendStatus(500).end();
@@ -98,10 +120,6 @@ routes.post('/catupdate', async (req, res) => {
     const f = file;
     f[req.body.cat] = req.body;
     fs.writeJSON(outputFile, f, (err2) => {
-      console.log('req.body');
-      console.log(req.body);
-      console.log('f');
-      console.log(f);
       if (err2) {
         winston.error(err2);
         res.sendStatus(500).end();
@@ -189,8 +207,6 @@ routes.post('/batch/match', async (req, res) => {
   const outputFile = path.join(config.directories.storage, 'batch_match');
 
   fs.writeJSON(outputFile, req.body, (err) => {
-    console.log('req.body');
-    console.log(req.body);
     if (err) {
       winston.error(err);
       res.sendStatus(500).end();
@@ -210,9 +226,7 @@ routes.get('/sync/prep', async (req, res) => {
 
 // TVDB
 routes.post('/tvdb', async (req, res) => {
-  console.log(req.body.series_name);
   if (req.body.new_series && req.body.tvdb_id === '') {
-    console.log('New Series');
     res.send(
       await tvdb.getSeriesByName(req.body.series_name).then((response) => {
         const shows = [];
@@ -221,7 +235,6 @@ routes.post('/tvdb', async (req, res) => {
             text: `${s.seriesName} | ${s.firstAired} | ${s.network}`,
             value: s.id,
           });
-          console.log(`${s.seriesName} | ${s.firstAired} | ${s.network}`);
         });
         return { newShows: shows, select: shows[0].text };
       }),
@@ -232,7 +245,6 @@ routes.post('/tvdb', async (req, res) => {
     await tvdb
       .getEpisodesBySeriesId(req.body.tvdb_id)
       .then((response) => {
-        console.log(response[response.length - 1]);
         if ('batch' in req.body) {
           return response;
         }
@@ -261,11 +273,9 @@ routes.post('/tvdb', async (req, res) => {
         if (episode3 != null && 'episodeName' in episode3) {
           titles.title3 = episode3.episodeName;
         }
-        console.log(titles);
         return titles;
       })
       .catch((error) => {
-        console.log(error);
       }),
   );
 });
@@ -287,11 +297,9 @@ routes.post('/tvdb/dates', async (req, res) => {
         if (response.length !== counter) {
           finalDate = response[response.length - counter].firstAired;
         }
-        console.log(`${response[0].firstAired} | ${finalDate}`);
         return { premiere: response[0].firstAired, final: finalDate };
       })
       .catch((error) => {
-        console.log(error);
       }),
   );
 });

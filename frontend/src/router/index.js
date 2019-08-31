@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Meta from 'vue-meta';
 
 import BootstrapVue from 'bootstrap-vue';
 import VueResource from 'vue-resource';
@@ -44,7 +45,6 @@ import EvaluateChoose from '@/components/Evaluate/Choose';
 import EvaluateJob from '@/components/Evaluate/Job';
 import MonitorChoose from '@/components/Monitor/Choose';
 import MonitorJob from '@/components/Monitor/Job';
-import Meta from 'vue-meta';
 
 import DashboardIndex from '@/components/Dashboard/Index';
 import CorpusProject from '@/components/Corpus/Project';
@@ -72,7 +72,7 @@ Vue.use(Meta);
 Vue.use(VueMoment);
 Vue.use(VueCookie);
 
-Vue.use(VueLodash, { name: '_' });
+Vue.prototype._ = VueLodash;
 
 Vue.http.options.root = config.rootUrl;
 Vue.http.interceptors.push((request) => {

@@ -7,8 +7,18 @@
           :style="{width: '100%'}"
           size="lg"
           class="mt-2"
-          @click="showColor()"
+          @click="markCurrentGroup"
         >{{ letter + ') ' + button[1] }}</b-button>
+      </b-col>
+      <b-col
+        v-if="currentSub != ''"
+        class="px-0 mx-0">
+        <b-btn
+          :variant="color"
+          :style="{width: '30px'}"
+          class="mt-2 px-0 mx-0"
+          size="lg"
+        >{{ currentSub }}</b-btn>
       </b-col>
       <b-col
         v-for="sub in subs"
@@ -46,13 +56,26 @@ export default {
       required: true,
     },
   },
-  data: () => ({}),
+  data: () => ({
+    markAnswer: false,
+    currentSub: '',
+  }),
   computed: {
     color() {
-      if (!this.solution) {
-        return 'primary';
+      if (this.solution) {
+        this.markCurrentGroup(this.button[0]);
+        if (this.validateAnswer(this.button[0])) {
+          return 'success';
+        }
+        return 'danger';
       }
-      return this.validateAnswer(this.button[0]);
+      return 'primary';
+    },
+    subColor() {
+      if (this.solution) {
+        return this.validateAnswer(this.button[0]);
+      }
+      return 'primary';
     },
   },
   watch: {},
@@ -60,13 +83,20 @@ export default {
   mounted() {},
   methods: {
     validateAnswer(answer) {
-      if (answer) {
-        return 'success';
-      }
-      return 'danger';
+      return answer;
     },
-    showColor() {
-      this.solution = true;
+    markCurrentGroup() {
+      if (this.solution) {
+        if (this.validateAnswer(this.button[0])) {
+          this.currentSub = String.fromCodePoint(128293);
+        } else {
+          this.currentSub = String.fromCodePoint(128167);
+        }
+      } else if (this.currentSub === '') {
+        this.currentSub = String.fromCodePoint(128513);
+      } else {
+        this.currentSub = '';
+      }
     },
   },
 };

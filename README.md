@@ -1,1 +1,1 @@
-# SeriesManager
+# QuizaLitness
