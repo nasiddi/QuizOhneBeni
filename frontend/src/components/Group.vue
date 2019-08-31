@@ -9,7 +9,7 @@
       :style="{width: '100%'}"
       class="mt-2"
       @click="goToAnswer()"
-    >Continue</b-button>
+    >Weiter</b-button>
   </div>
 </template>
 

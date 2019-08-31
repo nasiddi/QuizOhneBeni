@@ -1,11 +1,12 @@
 <template>
   <div>
     <b-card
+      :header="infos"
       :title="question.q"
       class="mt-3"
       border-variant="primary"
-      header-bg-variant="primary"
-      header-text-variant="white"
+      header-bg-variant="transparent"
+      header-text-variant="black"
       align="center">
 
       <b-img
@@ -135,11 +136,13 @@ export default {
     subs: {},
     solution: false,
     answered: [],
+    infos: '',
   }),
   computed: {},
   watch: {},
   created() {
-    this.question = this.$route.params;
+    this.question = this.$route.params.question;
+    this.infos = `${this.$route.params.cat} ${this.$route.params.points}`;
     let counter = 0;
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(this.question.a)) {

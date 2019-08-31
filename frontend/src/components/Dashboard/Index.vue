@@ -83,12 +83,6 @@ export default {
           }
         });
     },
-    async goToQuestion(cat, num) {
-      this.$router.push({
-        name: 'question',
-        params: [cat, num],
-      });
-    },
   },
 };
 </script>

@@ -80,7 +80,7 @@ export default {
         .then(
           this.$router.push({
             name: 'question',
-            params: this.questions[points],
+            params: { question: this.questions[points], cat: this.cat.name, points },
           }),
         );
     },

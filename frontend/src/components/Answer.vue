@@ -1,11 +1,9 @@
 <template>
   <div>
-    <b-alert
-      :show="error"
-      variant="danger"
-      class="mt-2"
-    >Group Missing</b-alert>
-
+    <b-card
+      :style="{width: '100%'}"
+      :title="'Gruppe ' + group"
+      class="text-center py-1 mt-3"/>
     <b-button
       :style="{width: '100%'}"
       variant="primary"
@@ -59,7 +57,7 @@ export default {
   props: {},
   data: () => ({
     selectedAnswer: '',
-    group: null,
+    group: undefined,
     error: false,
     dismissCountDown: 0,
     dismissCountDownError: 0,
@@ -68,13 +66,16 @@ export default {
   watch: {},
   created() {
     this.group = this.$route.params.group;
-    if (this.group === null) {
-      this.error = true;
+    if (this.group === undefined || this.group == null) {
+      this.$router.push({ name: 'group' });
     }
   },
   mounted() {},
   methods: {
     async submitAnswer(selected) {
+      if (this.group === undefined || this.group == null) {
+        this.$router.push({ name: 'group' });
+      }
       this.$http
         .post('openjobs/saveanswer', { group: this.group, answer: selected })
         .then((res) => {

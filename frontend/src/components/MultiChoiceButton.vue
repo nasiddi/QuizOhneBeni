@@ -86,13 +86,13 @@ export default {
       return answer;
     },
     markCurrentGroup() {
-      if (this.solution) {
+      if (this.solution && this.currentSub !== '') {
         if (this.validateAnswer(this.button[0])) {
           this.currentSub = String.fromCodePoint(128293);
         } else {
           this.currentSub = String.fromCodePoint(128167);
         }
-      } else if (this.currentSub === '') {
+      } else if (!this.solution && this.currentSub === '') {
         this.currentSub = String.fromCodePoint(128513);
       } else {
         this.currentSub = '';
