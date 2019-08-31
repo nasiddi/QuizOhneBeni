@@ -63,10 +63,8 @@
 </template>
 
 <script>
-import TheSearch from './TheSearch';
 
 export default {
-  components: { TheSearch },
   computed: {
     loggedIn() {
       return this.$auth.isLoggedIn();
