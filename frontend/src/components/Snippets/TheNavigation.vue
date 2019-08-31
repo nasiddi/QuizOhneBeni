@@ -33,9 +33,6 @@
           <template slot="button-content">
             <font-awesome-icon icon="user" /> {{ tokenDetails.name }}
           </template>
-          <b-dropdown-item :to="{ name: 'settings' }">
-            <font-awesome-icon icon="cogs" /> Settings
-          </b-dropdown-item>
           <b-dropdown-item :to="{ name: 'finish' }">
             Finish
           </b-dropdown-item>

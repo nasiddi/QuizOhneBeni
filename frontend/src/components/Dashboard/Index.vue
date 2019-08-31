@@ -85,28 +85,8 @@ export default {
     },
     async goToQuestion(cat, num) {
       this.$router.push({
-        name: 'sync.prep',
+        name: 'question',
         params: [cat, num],
-      });
-    },
-    async stats() {
-      this.$router.push({
-        name: 'stats',
-      });
-    },
-    async update() {
-      this.$router.push({
-        name: 'update',
-      });
-    },
-    async batch() {
-      this.$router.push({
-        name: 'batch.prep',
-      });
-    },
-    async files() {
-      this.$router.push({
-        name: 'filetree',
       });
     },
   },

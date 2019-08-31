@@ -14,12 +14,9 @@
 </template>
 
 <script>
-import MultiChoiceButton from './MultiChoiceButton';
-
 
 export default {
   components: {
-    MultiChoiceButton,
   },
   props: {
   },

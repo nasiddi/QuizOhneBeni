@@ -76,7 +76,7 @@ export default {
   methods: {
     async submitAnswer(selected) {
       this.$http
-        .post('jobs/saveanswer', { group: this.group, answer: selected })
+        .post('openjobs/saveanswer', { group: this.group, answer: selected })
         .then((res) => {
           if (res.body === 'failed') {
             this.dismissCountDownError = 5;
