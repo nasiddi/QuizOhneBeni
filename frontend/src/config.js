@@ -1,4 +1,4 @@
 module.exports = {
-  rootUrl: 'http://greece.quiz:8778/',
+  rootUrl: 'http://localhost:8778/',
   authTokenCookie: 'token',
 };
