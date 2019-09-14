@@ -7,18 +7,8 @@
           :style="{width: '100%'}"
           size="lg"
           class="mt-2"
-          @click="markCurrentGroup"
+          @click="markSelection"
         >{{ letter + ') ' + button[1] }}</b-button>
-      </b-col>
-      <b-col
-        v-if="currentSub != ''"
-        class="px-0 mx-0">
-        <b-btn
-          :variant="color"
-          :style="{width: '30px'}"
-          class="mt-2 px-0 mx-0"
-          size="lg"
-        >{{ currentSub }}</b-btn>
       </b-col>
       <b-col
         v-for="sub in subs"
@@ -57,23 +47,15 @@ export default {
     },
   },
   data: () => ({
-    markAnswer: false,
-    currentSub: '',
+    localSolution: false,
   }),
   computed: {
     color() {
-      if (this.solution) {
-        this.markCurrentGroup(this.button[0]);
+      if (this.solution || this.localSolution) {
         if (this.validateAnswer(this.button[0])) {
           return 'success';
         }
         return 'danger';
-      }
-      return 'primary';
-    },
-    subColor() {
-      if (this.solution) {
-        return this.validateAnswer(this.button[0]);
       }
       return 'primary';
     },
@@ -85,18 +67,8 @@ export default {
     validateAnswer(answer) {
       return answer;
     },
-    markCurrentGroup() {
-      if (this.solution && this.currentSub !== '') {
-        if (this.validateAnswer(this.button[0])) {
-          this.currentSub = String.fromCodePoint(128293);
-        } else {
-          this.currentSub = String.fromCodePoint(128167);
-        }
-      } else if (!this.solution && this.currentSub === '') {
-        this.currentSub = String.fromCodePoint(128513);
-      } else {
-        this.currentSub = '';
-      }
+    markSelection() {
+      this.localSolution = true;
     },
   },
 };
