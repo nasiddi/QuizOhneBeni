@@ -27,16 +27,20 @@ export default {
   methods: {
     goToQuestion() {
       const question = {
-        a: {
-          lit: false,
-          ob: false,
-          easy: false,
-          elefantös: false,
-          'di puuri litness': true,
+        cat: 'Test',
+        points: 100,
+        question: {
+          a: {
+            lit: false,
+            ob: false,
+            easy: false,
+            elefantös: false,
+            'di puuri litness': true,
+          },
+          audio: '',
+          img: '',
+          q: 'Wie sind die Ferie?',
         },
-        audio: '',
-        img: '',
-        q: 'Wie sind die Ferie?',
       };
       this.$router.push({
         name: 'question',

@@ -10,8 +10,8 @@
       align="center">
 
       <b-img
-        v-if="imageName !== ''"
-        :src="mediaURL + imageName + '.png'"
+        v-if="image !== ''"
+        :src="require(`../../media/${image}.png`)"
         fluid
         rounded/>
 
@@ -132,6 +132,7 @@ export default {
     songs: [],
     imagePos: [],
     imageName: '',
+    image: '',
     answers: [],
     subs: {},
     solution: false,
@@ -185,6 +186,16 @@ export default {
       } else {
         this.imageName = this.question.img;
       }
+    }
+
+    if (this.question.entry) {
+      this.$http.post('jobs/activateentry');
+      this.$router.push({
+        name: 'estimatequestion',
+        params: { question: this.question, infos: this.infos },
+      });
+    } else {
+      this.$http.post('jobs/deactivateentry');
     }
   },
   mounted() {},
@@ -241,14 +252,6 @@ export default {
         }
       });
     },
-    async goToQuestion(points) {
-      this.cat[points] = false;
-      this.$http.post('jobs/catupdate', this.cat).then(
-        this.$router.push({
-          name: 'dashboard',
-        }),
-      );
-    },
     getMediaUrl(name) {
       return this.mediaURL + name;
     },
@@ -269,7 +272,7 @@ export default {
       name[1] += 1;
     },
     changeImage() {
-      this.imageName = this.imagePos.pop();
+      this.image = this.imagePos.shift();
     },
   },
 };

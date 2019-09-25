@@ -15,8 +15,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import Question from '@/components/Question';
+import EstimateQuestion from '@/components/EstimateQuestion';
 import Group from '@/components/Group';
 import Answer from '@/components/Answer';
+import AnswerEntry from '@/components/AnswerEntry';
 import Info from '@/components/Info';
 import Reroute from '@/components/Snippets/Reroute';
 import Finish from '@/components/Finish';
@@ -75,6 +77,12 @@ export default new Router({
       beforeEnter: Vue.prototype.$auth.requireAuth,
     },
     {
+      path: '/estimatequestion',
+      name: 'estimatequestion',
+      component: EstimateQuestion,
+      beforeEnter: Vue.prototype.$auth.requireAuth,
+    },
+    {
       path: '/group',
       name: 'group',
       component: Group,
@@ -83,6 +91,11 @@ export default new Router({
       path: '/answer',
       name: 'answer',
       component: Answer,
+    },
+    {
+      path: '/answerentry',
+      name: 'answerentry',
+      component: AnswerEntry,
     },
     {
       path: '/reroute',

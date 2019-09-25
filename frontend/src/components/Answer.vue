@@ -34,6 +34,12 @@
       class="mt-2"
       @click="submitAnswer('e')"
     >e</b-button>
+    <b-button
+      :style="{width: '100%'}"
+      variant="secondary"
+      class="mt-4"
+      @click="switchAnswerMode"
+    >Eingabefeld</b-button>
     <b-alert
       :show="dismissCountDown"
       fade
@@ -47,7 +53,7 @@
       variant="danger"
       class="mt-2"
       @dismissed="dismissCountDownError=0"
-    >Speichern fehlgeschlagen</b-alert>
+    >{{ errorMessage }}</b-alert>
   </div>
 </template>
 
@@ -61,6 +67,7 @@ export default {
     error: false,
     dismissCountDown: 0,
     dismissCountDownError: 0,
+    errorMessage: '',
   }),
   computed: {},
   watch: {},
@@ -80,10 +87,26 @@ export default {
         .post('openjobs/saveanswer', { group: this.group, answer: selected })
         .then((res) => {
           if (res.body === 'failed') {
+            this.errorMessage = 'Speichern fehlgeschlagen';
             this.dismissCountDownError = 5;
           } else {
             this.selectedAnswer = res.body;
             this.dismissCountDown = 5;
+          }
+        });
+    },
+    switchAnswerMode() {
+      this.$http
+        .post('openjobs/entryfield')
+        .then((res) => {
+          if (res.body === false) {
+            this.errorMessage = 'Now is not the time for that';
+            this.dismissCountDownError = 5;
+          } else {
+            this.$router.push({
+              name: 'answerentry',
+              params: { group: this.group },
+            });
           }
         });
     },

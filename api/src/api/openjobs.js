@@ -4,13 +4,15 @@
 const winston = require('winston');
 const path = require('path');
 const fs = require('fs-extra');
-const config = require('../../config');
 const express = require('express');
+const config = require('../../config');
+
 const openroutes = express.Router();
 
 openroutes.post('/saveanswer', async (req, res) => {
   const outputFile = path.join(config.directories.storage, 'answers.json');
   const lock = path.join(config.directories.storage, 'answers.lock');
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     if (!fs.existsSync(lock)) {
       fs.closeSync(fs.openSync(lock, 'w'));
@@ -41,4 +43,16 @@ openroutes.post('/saveanswer', async (req, res) => {
   }
 });
 
-module.exports = { openroutes: openroutes };
+openroutes.post('/entryfield', async (req, res) => {
+  const inputFile = path.join(config.directories.storage, 'entryfield.json');
+
+  fs.readJson(inputFile, (err, file) => {
+    if (err) {
+      winston.error(err);
+      res.sendStatus(500).end();
+    }
+    res.json(file);
+  });
+});
+
+module.exports = { openroutes };

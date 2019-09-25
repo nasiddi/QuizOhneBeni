@@ -6,8 +6,8 @@ const winston = require('winston');
 const express = require('express');
 const path = require('path');
 const fs = require('fs-extra');
-const config = require('../../config');
 const papa = require('papaparse');
+const config = require('../../config');
 
 const routes = express.Router();
 
@@ -24,32 +24,64 @@ routes.post('/catclicked', async (req, res) => {
 
 routes.post('/questions', async (req, res) => {
   const inputFile = path.join(config.directories.storage, 'questions.csv');
-  var questions = { 'cat1': {}, 'cat2': {}, 'cat3': {}, 'cat4': {}, 'cat5': {}, 'cat6': {} };
-  var data;
-  var input = fs.readFileSync(inputFile, 'utf8');
+  const questions = {
+    cat1: {}, cat2: {}, cat3: {}, cat4: {}, cat5: {}, cat6: {},
+  };
+  let rows;
+  const input = fs.readFileSync(inputFile, 'utf8');
   papa.parse(input, {
     header: true,
-    delimiter: ",",
+    delimiter: ',',
     quoteChar: '"',
-    complete: function (results) {
-      data = results.data;
-      var counter = 0;
-      var d = data[counter];
-      while (d.text != ''){
-        var unordered = { [d.answer]: true, [d.f1]: false, [d.f2]: false, [d.f3]: false, [d.f4]: false };
+    complete(results) {
+      rows = results.data;
+      let counter = 0;
+      let d = rows[counter];
+      while (d.text !== '') {
+        const unordered = {
+          [d.answer]: true, [d.f1]: false, [d.f2]: false, [d.f3]: false, [d.f4]: false,
+        };
         const ordered = {};
-        Object.keys(unordered).sort().forEach(function (key) {
+        Object.keys(unordered).sort().forEach((key) => {
           ordered[key] = unordered[key];
         });
-        questions[d['cat']][d.points] = {
-          'a': ordered,
-          'audio': d.audio,
-          'img': d.img,
-          'q': d.text
-        }
+        questions[d.cat][d.points] = {
+          a: ordered,
+          audio: d.audio,
+          img: d.img,
+          entry: d.entry,
+          q: d.text,
+        };
         counter += 1;
-        d = data[counter]
+        d = rows[counter];
       }
+      res.json(questions);
+    },
+  });
+});
+
+routes.post('/estimatequestions', async (req, res) => {
+  const inputFile = path.join(config.directories.storage, 'estimatequestions.csv');
+  const questions = [];
+  let rows;
+  const input = fs.readFileSync(inputFile, 'utf8');
+  papa.parse(input, {
+    header: true,
+    delimiter: ',',
+    quoteChar: '"',
+    complete(results) {
+      rows = results.data;
+      let counter = 0;
+      let d = rows[counter];
+      while (d !== undefined && d.question !== '') {
+        questions.push({
+          a: d.answer,
+          q: d.question,
+        });
+        counter += 1;
+        d = rows[counter];
+      }
+      console.log(questions);
       res.json(questions);
     },
   });
@@ -86,6 +118,29 @@ routes.post('/catupdate', async (req, res) => {
   });
 });
 
+routes.post('/activateentry', async (req, res) => {
+  const outputFile = path.join(config.directories.storage, 'entryfield.json');
+  fs.writeJSON(outputFile, true, (err) => {
+    if (err) {
+      winston.error(err2);
+      res.sendStatus(500).end();
+    }
+    res.sendStatus(200);
+  });
+});
+
+routes.post('/deactivateentry', async (req, res) => {
+  const outputFile = path.join(config.directories.storage, 'entryfield.json');
+  fs.writeJSON(outputFile, false, (err) => {
+    if (err) {
+      winston.error(err2);
+      res.sendStatus(500).end();
+    }
+    res.sendStatus(200);
+  });
+});
+
+
 routes.post('/catreset', async (req, res) => {
   const outputFile = path.join(config.directories.storage, 'cat_clicked.json');
   const inputFile = path.join(config.directories.storage, 'cat_clicked_reset.json');
@@ -121,6 +176,18 @@ routes.post('/resetanswers', async (req, res) => {
       }
       res.json(file);
     });
+  });
+});
+
+routes.post('/image', async (req, res) => {
+  const inputFile = path.join(config.directories.storage, 'media', `${req.body.name}.png`);
+  console.log(inputFile);
+  fs.readFile(inputFile, (err, file) => {
+    if (err) {
+      winston.error(err);
+      res.sendStatus(500).end();
+    }
+    res.json({ image: file.toString('base64') });
   });
 });
 

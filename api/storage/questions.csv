@@ -1,43 +1,43 @@
-﻿buffer,cat,points,answer,f1,f2,f3,f4,img,audio,text
-,cat1,10,David,Salomo,Hiob,Jesaja,Paulus,,,Von wem wurde der grösste Teil der Psalmen verfasst?
-,cat1,20,Jakob,Abraham,Josua,Mose,"Johannes, der Täufer",,,"Wer hatte den Traum einer Himmelsleiter, während er mit einem Stein unter dem Kopf schlief?"
-,cat1,30,,,,,,,,Challenge - Emoji Bible Stories
-,cat1,40,Wasser wird zu Wein,Dämon wird ausgetrieben,Gelähtmer wird geheilt,Toter wird auferweckt,Speisung der 5000,,,"Welches ist Jesus erstes Wunder, das in der Bibel erwähnt wird?"
-,cat1,50,Matthäus,Lukas,Johannes,Petrus,Markus,,,Welches Evangelium hat am meisten Kapitel?
-,cat2,10,Newton (N),Kilogramm (kg),Sekunden (s),Joule (J),Ampere (A),,,Welche Einheit wird in der Physik verwendet um Kräfte zu messen?
-,cat2,20,1848,1291,1798,1945,1519,,,Wann wurde die Schweizer Eidgenossenschaft als Budesstaat gegründet?
-,cat2,30,5-8 Liter,11-16 Liter,18-24 Liter,25-31 Liter,40-50 Liter,,,Wie viel Blut hat ein erwachsener Mensch?
-,cat2,40,Slowakei,Tschechien,Belgien,Dänemark,Polen,,,An welches Land grenzt Deutschland nicht?
-,cat2,50,,,,,,,,Challenge - Weltkarte
-,cat3,10,,,,,,,,Challenge - Pin
-,cat3,20,Athena,Ambrosia,La Pergola,Thalassa,Artemis,,,Welches Restaurant gibt es im Aldemar nicht?
-,cat3,30,Dicksack,Grossmuul,Sensibeli,Grobian,Hoseschiiser,,,Welche Beleidigung wurde heute im Theater nicht verwendet?
-,cat3,40,Ana Dina,Domi,Nadine,Jonas,Roman,,,Wer ist der/die jüngste Leiter(in)?
-,cat3,50,2007,2005,2009,2011,1996,,,Seit welchem Jahr finden die Ferien am Meer im Aldemar statt?
-,cat4,10,15,12,18,21,24,,,Mit wie vielen Kugeln spielt man im klassischen Pool Billard (ohne die weisse Kugel)?
-,cat4,20,Neymar (222 Mio.),Ronaldo (117 Mio.),Ronaldo (222 Mio.),Mbappe (135 Mio.),Neymar (117 Mio.),,,Wer und wie teuer war der teurste Transfer im Fussball im Sommer 2017?
-,cat4,30,4 Viertel à 12 min,3 Drittel à 20 min,2 Halbzeiten à 25 min,5 Fünftel à 8 min,4 Drittel à 15.5 min,,,Wie lange dauert ein Basketball Spiel in der NBA?
-,cat4,40,,,,,,,,Challenge - Pyramide
-,cat4,50,Verweigerung,Abtausch,Fesselung,Rochade,Gambit,,,"Welches ist kein Begriff, der im Schachspiel geläufig verwendet wird?"
-,cat5,10,,,,,,,,Challenge - Schätzfragen
-,cat5,20,Engen Räumen,Offenen Gewässer,Samichlaus,Gewittern,Menschenmassen,,,Klaustrophobie ist die Angst vor was?
-,cat5,30,anfechten,befürworten,eintreten,plädieren,vertreten,,,Welches Wort ist kein Synonym von den anderen?
-,cat5,40,Licht,Bild,Aufnahme,Still (bewegungslos),Andenken,,,Foto ist vom griechischen Wort Photos (φωτός) abgeleitet. Wie wird das Wort direkt ins Deutsche übersetzt?
-,cat5,50,Ehrenmann/Ehrenfrau,verbuggt,Snackosaurus,Lauch,sheeeesh,,,Welches Wort wurde zum deutschen Jugendwort des Jahres gekürt?
-,cat6,10,10,5,15,20,25,,,Wieviele Character waren sowohl in der Herr der Ringe als auch der Hobbit Trioligie zu sehen?
-,cat6,20,,,,,,,,Challenge - Lava
-,cat6,30,$22.5 Milliarden,$225 Milliarden,$2.25 Billionen,$2.25 Milliarden,$225 Millionen,,,Wieviel Dollars hat das Marvel Cinematic Universe bisher weltweit eingespielt?
-,cat6,40,Albus Dumbledore,Dobby,Rubeus Hagrid,Minerva McGonagall,Severus Snape,,,Zwischen dem 2. und 3. Harry Potter musste aufgrund eines Todes ein Charakter neu besetzt werden. Welcher war es?
-,cat6,50,Star Wars,Harry Potter,X-Men,Shrek,How to Train Your Dragon,,,Welche Film Serie basiert nicht auf  Büchern/Comics?
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
+﻿buffer,cat,points,answer,f1,f2,f3,f4,img,entry,audio,text
+,cat1,10,David,Salomo,Hiob,Jesaja,Paulus,,,,Von wem wurde der grösste Teil der Psalmen verfasst?
+,cat1,20,Jakob,Abraham,Josua,Mose,"Johannes, der Täufer",,,,"Wer hatte den Traum einer Himmelsleiter, während er mit einem Stein unter dem Kopf schlief?"
+,cat1,30,,,,,,1;2;3;4;5,,,Challenge - Emoji Bible Stories
+,cat1,40,Wasser wird zu Wein,Dämon wird ausgetrieben,Gelähtmer wird geheilt,Toter wird auferweckt,Speisung der 5000,,,,"Welches ist Jesus erstes Wunder, das in der Bibel erwähnt wird?"
+,cat1,50,Matthäus,Lukas,Johannes,Petrus,Markus,,,,Welches Evangelium hat am meisten Kapitel?
+,cat2,10,Newton (N),Kilogramm (kg),Sekunden (s),Joule (J),Ampere (A),,,,Welche Einheit wird in der Physik verwendet um Kräfte zu messen?
+,cat2,20,1848,1291,1798,1945,1519,,,,Wann wurde die Schweizer Eidgenossenschaft als Budesstaat gegründet?
+,cat2,30,5-8 Liter,11-16 Liter,18-24 Liter,25-31 Liter,40-50 Liter,,,,Wie viel Blut hat ein erwachsener Mensch?
+,cat2,40,Slowakei,Tschechien,Belgien,Dänemark,Polen,,,,An welches Land grenzt Deutschland nicht?
+,cat2,50,,,,,,,,,Challenge - Weltkarte
+,cat3,10,,,,,,,,,Challenge - Foto
+,cat3,20,Athena,Ambrosia,La Pergola,Thalassa,Artemis,,,,Welches Restaurant gibt es im Aldemar nicht?
+,cat3,30,Dicksack,Grossmuul,Sensibeli,Grobian,Hoseschiiser,,,,Welche Beleidigung wurde heute im Theater nicht verwendet?
+,cat3,40,Ana Dina,Domi,Nadine,Jonas,Roman,,,,Wer ist der/die jüngste Leiter(in)?
+,cat3,50,2007,2005,2009,2011,1996,,,,Seit welchem Jahr finden die Ferien am Meer im Aldemar statt?
+,cat4,10,15,12,18,21,24,,,,Mit wie vielen Kugeln spielt man im klassischen Pool Billard (ohne die weisse Kugel)?
+,cat4,20,Neymar (222 Mio.),Ronaldo (117 Mio.),Ronaldo (222 Mio.),Mbappe (135 Mio.),Neymar (117 Mio.),,,,Wer und wie teuer war der teurste Transfer im Fussball im Sommer 2017?
+,cat4,30,4 Viertel à 12 min,3 Drittel à 20 min,2 Halbzeiten à 25 min,5 Fünftel à 8 min,4 Drittel à 15.5 min,,,,Wie lange dauert ein Basketball Spiel in der NBA?
+,cat4,40,,,,,,,,,Challenge - Pyramide
+,cat4,50,Verweigerung,Abtausch,Fesselung,Rochade,Gambit,,,,"Welches ist kein Begriff, der im Schachspiel geläufig verwendet wird?"
+,cat5,10,,,,,,,TRUE,,Challenge - Schätzfragen
+,cat5,20,Engen Räumen,Offenen Gewässer,Samichlaus,Gewittern,Menschenmassen,,,,Klaustrophobie ist die Angst vor was?
+,cat5,30,anfechten,befürworten,eintreten,plädieren,vertreten,,,,Welches Wort ist kein Synonym von den anderen?
+,cat5,40,Licht,Bild,Aufnahme,Still (bewegungslos),Andenken,,,,Foto ist vom griechischen Wort Photos (φωτός) abgeleitet. Wie wird das Wort direkt ins Deutsche übersetzt?
+,cat5,50,Ehrenmann/Ehrenfrau,verbuggt,Snackosaurus,Lauch,sheeeesh,,,,Welches Wort wurde zum deutschen Jugendwort des Jahres 2018 gekürt?
+,cat6,10,10,5,15,20,25,,,,Wieviele Character waren sowohl in der Herr der Ringe als auch der Hobbit Trioligie zu sehen?
+,cat6,20,,,,,,,,,Challenge - Lava
+,cat6,30,$22.5 Milliarden,$225 Milliarden,$2.25 Billionen,$2.25 Milliarden,$225 Millionen,,,,Wieviel Dollars hat das Marvel Cinematic Universe bisher weltweit eingespielt?
+,cat6,40,Albus Dumbledore,Dobby,Rubeus Hagrid,Minerva McGonagall,Severus Snape,,,,Zwischen dem 2. und 3. Harry Potter musste aufgrund eines Todes ein Charakter neu besetzt werden. Welcher war es?
+,cat6,50,Star Wars,Harry Potter,X-Men,Shrek,How to Train Your Dragon,,,,Welche Film Serie basiert nicht auf  Büchern/Comics?
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,

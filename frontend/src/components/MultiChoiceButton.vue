@@ -8,7 +8,7 @@
           size="lg"
           class="mt-2"
           @click="markSelection"
-        >{{ letter + ') ' + button[1] }}</b-button>
+        >{{ answerText }}</b-button>
       </b-col>
       <b-col
         v-for="sub in subs"
@@ -58,6 +58,12 @@ export default {
         return 'danger';
       }
       return 'primary';
+    },
+    answerText() {
+      if (this.letter !== '') {
+        return `${this.letter}) ${this.button[1]}`;
+      }
+      return this.button[1];
     },
   },
   watch: {},
