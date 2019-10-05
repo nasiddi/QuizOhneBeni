@@ -93,7 +93,7 @@ export default {
         .sort((first, second) => first[0] - second[0]);
     },
     showSolution() {
-      this.answerDict[this.question.a] = { subs: [], winner: true };
+      this.answerDict[this.question.a] = { subs: [], winner: null };
       this.showSubmissions();
       this.solution = true;
     },
@@ -131,6 +131,7 @@ export default {
     },
     nextQuestion() {
       this.$http.post('jobs/resetanswers');
+      this.solution = false;
       this.question = this.questions.shift();
       this.guessButtons = [];
       this.answerDict = {};

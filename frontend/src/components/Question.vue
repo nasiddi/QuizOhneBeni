@@ -131,7 +131,6 @@ export default {
     timer: 1000,
     songs: [],
     imagePos: [],
-    imageName: '',
     image: '',
     answers: [],
     subs: {},
@@ -184,7 +183,7 @@ export default {
           this.imagePos.push(s);
         });
       } else {
-        this.imageName = this.question.img;
+        this.image = this.question.img;
       }
     }
 

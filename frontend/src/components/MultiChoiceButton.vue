@@ -52,6 +52,9 @@ export default {
   computed: {
     color() {
       if (this.solution || this.localSolution) {
+        if (this.button[0] === null) {
+          return 'primary';
+        }
         if (this.validateAnswer(this.button[0])) {
           return 'success';
         }

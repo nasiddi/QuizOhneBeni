@@ -37,7 +37,9 @@ routes.post('/questions', async (req, res) => {
       rows = results.data;
       let counter = 0;
       let d = rows[counter];
-      while (d.text !== '') {
+      while (d !== undefined && d.text !== '') {
+        console.log(d.text);
+
         const unordered = {
           [d.answer]: true, [d.f1]: false, [d.f2]: false, [d.f3]: false, [d.f4]: false,
         };
